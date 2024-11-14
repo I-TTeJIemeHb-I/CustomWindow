@@ -1,0 +1,48 @@
+﻿<Window x:Class="CustomWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResize" WindowStyle="None" 
+        AllowsTransparency="True" Background="Transparent">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="14"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid Margin="7" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Gray" MouseDown="Window_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="6,0">
+                <Button Width="30" Height="30" Content="_" Click="MinimizeButton_Click"/>
+                <Button Width="30" Height="30" Click="MaximizeRestoreButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <!-- Триггер для состояния Normal -->
+                                <DataTrigger Binding="{Binding WindowState}" Value="Normal">
+                                    <Setter Property="Content" Value="□"/>
+                                </DataTrigger>
+
+                                <!-- Триггер для состояния Maximized -->
+                                <DataTrigger Binding="{Binding WindowState}" Value="Maximized">
+                                    <Setter Property="Content" Value="!"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button Width="30" Height="30" Content="X" Click="CloseButton_Click"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
