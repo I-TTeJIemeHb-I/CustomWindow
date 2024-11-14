@@ -16,6 +16,7 @@ namespace CustomWindow.DefaultWindow
             _normalWorkArea = new double[2];
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
             StateChanged += Window_StateChanged;
+            SizeChanged += Window_SizeChanged;
             LocationChanged += Window_LocationChanged;
         }
 
@@ -35,6 +36,7 @@ namespace CustomWindow.DefaultWindow
         {
             SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
             StateChanged -= Window_StateChanged;
+            SizeChanged -= Window_SizeChanged;
             LocationChanged -= Window_LocationChanged;
             base.OnClosed(e);
         }
@@ -107,15 +109,23 @@ namespace CustomWindow.DefaultWindow
         /// </summary>
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+           if (WindowState == WindowState.Normal)
+           {
+                Width = _normalWorkArea[0];
+                Height = _normalWorkArea[1];
+           }
+        }
+
+        /// <summary>
+        /// Реагирует на изменение размеров окна.
+        /// Обновляет значения массива _normalWorkArea
+        /// </summary>
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
             {
                 _normalWorkArea[0] = ActualWidth;
                 _normalWorkArea[1] = ActualHeight;
-            }
-            else if (WindowState == WindowState.Normal)
-            {
-                Width = _normalWorkArea[0];
-                Height = _normalWorkArea[1];
             }
         }
 

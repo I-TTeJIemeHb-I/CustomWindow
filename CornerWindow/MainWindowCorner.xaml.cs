@@ -15,6 +15,7 @@ namespace CustomWindow.CornerWindow
             _normalWorkArea = new double[2];
             SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
             StateChanged += Window_StateChanged;
+            SizeChanged += Window_SizeChanged;
             LocationChanged += Window_LocationChanged;
         }
 
@@ -34,6 +35,7 @@ namespace CustomWindow.CornerWindow
         {
             SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
             StateChanged -= Window_StateChanged;
+            SizeChanged -= Window_SizeChanged;
             LocationChanged -= Window_LocationChanged;
             base.OnClosed(e);
         }
@@ -106,15 +108,23 @@ namespace CustomWindow.CornerWindow
         /// </summary>
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-            {
-                _normalWorkArea[0] = ActualWidth;
-                _normalWorkArea[1] = ActualHeight;
-            }
-            else if (WindowState == WindowState.Normal)
+            if (WindowState == WindowState.Normal)
             {
                 Width = _normalWorkArea[0];
                 Height = _normalWorkArea[1];
+            }
+        }
+
+        /// <summary>
+        /// Реагирует на изменение размеров окна.
+        /// Обновляет значения массива _normalWorkArea
+        /// </summary>
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                _normalWorkArea[0] = ActualWidth;
+                _normalWorkArea[1] = ActualHeight;
             }
         }
 
