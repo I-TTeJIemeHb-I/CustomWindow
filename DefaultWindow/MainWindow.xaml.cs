@@ -1,7 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using CustomWindow.CornerWindow;
+using Microsoft.Win32;
 using System.Windows;
 
-namespace CustomWindow
+namespace CustomWindow.DefaultWindow
 {
     public partial class MainWindow : Window
     {
@@ -152,6 +153,13 @@ namespace CustomWindow
                     this.DragMove();
                 }
             }
+        }
+
+
+        private void OpenWindowWithCorners_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindowCorner window = new MainWindowCorner();
+            window.Show();
         }
     }
 }
