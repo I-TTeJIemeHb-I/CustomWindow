@@ -11,10 +11,10 @@
         AllowsTransparency="True" Background="Transparent">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="14"/>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="8"/>
     </WindowChrome.WindowChrome>
 
-    <Grid Margin="7" Background="White">
+    <Grid Background="White">
         <Grid.Effect>
             <DropShadowEffect Color="Black" Direction="270" BlurRadius="7" ShadowDepth="1" Opacity="0.3"/>
         </Grid.Effect>
@@ -31,12 +31,12 @@
                         <Style TargetType="Button">
                             <Style.Triggers>
                                 <!-- Триггер для состояния Normal -->
-                                <DataTrigger Binding="{Binding WindowState}" Value="Normal">
+                                <DataTrigger Binding="{Binding behaviour.MyState}" Value="Normal">
                                     <Setter Property="Content" Value="□"/>
                                 </DataTrigger>
 
                                 <!-- Триггер для состояния Maximized -->
-                                <DataTrigger Binding="{Binding WindowState}" Value="Maximized">
+                                <DataTrigger Binding="{Binding behaviour.MyState}" Value="Maximized">
                                     <Setter Property="Content" Value="!"/>
                                 </DataTrigger>
                             </Style.Triggers>
